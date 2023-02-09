@@ -39,7 +39,10 @@ export async function getStaticPaths() {
 	return {
 		// false means our paths contain ALL of the supported
 		// true means next will try to generate a page for the path
-		fallback: false,
+		fallback: 'blocking',
+		// there might be more pages, if blocking, next will not respond
+		// with 404, it will try to generate that page on demand, and cache it
+		// so it can be generated as needed
 		paths: meetups.map((meetup) => ({
 			params: { meetupId: meetup._id.toString() }
 		}))
